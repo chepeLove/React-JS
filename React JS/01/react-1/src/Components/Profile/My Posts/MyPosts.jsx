@@ -3,7 +3,7 @@ import style from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-    let postsElements = props.state.posts
+    let postsElements = props.posts
         .map(p => <Post text = {p.textPost} likesCount={p.likesCount}/>)
 
     return (
@@ -11,7 +11,7 @@ const MyPosts = (props) => {
             <h3>my posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea> kek</textarea>
                 </div>
                 <div>
                     <button>Add post</button>
