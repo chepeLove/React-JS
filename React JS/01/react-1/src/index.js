@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import state from "./Redux/State";
 import {BrowserRouter, Route} from "react-router-dom";
+import {addPost} from "./Redux/State";
 
 ReactDOM.render(
     <BrowserRouter>
     <React.StrictMode>
-        <App state={state}/>
+        <App state={state} addPost={addPost}/>
     </React.StrictMode>,
     </BrowserRouter>,
     document.getElementById('root')
