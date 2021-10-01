@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route} from "react-router-dom";
-import store from "./Redux/State";
+import store from "./Redux/Store";
 
 export let rerenderAllTree = (state) => {
     ReactDOM.render(
