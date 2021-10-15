@@ -2,10 +2,9 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../Redux/dialogs-reducer";
 
 const Dialogs = (props) => {
-debugger
+
     let state = props.dialogsPage
 
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
@@ -14,12 +13,12 @@ debugger
 
     let newMessageBody = state.newMessageBody
 
-    let onSendMessageClick = ()=> {
+    let onSendMessageClick = () => {
         props.sendMessage()
     }
 
     let onNewMessageChange = (event) => {
-    let body = event.target.value
+        let body = event.target.value
         props.updateNewMessageBody(body)
     }
 
@@ -33,8 +32,10 @@ debugger
                 <div>
                     <div><textarea value={newMessageBody}
                                    onChange={onNewMessageChange}
-                                   placeholder='Enter your message'></textarea></div>
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
+                                   placeholder='Enter your message'/></div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
                 </div>
             </div>
         </div>
