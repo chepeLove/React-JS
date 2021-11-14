@@ -41,11 +41,10 @@ let Users = (props) => {
                                 })
                                     .then(response => {
                                         if (response.data.resultCode === 0){
-                                            props.follow(u.id)
+                                            props.unfollow(u.id)
                                         }
                                     })
 
-                                props.unfollow(u.id)
 
                             }}>Unfollow</button>
                             : <button onClick={() => {
