@@ -30,7 +30,7 @@ return instance.post(`follow/${userId}`,{},{
 
 export const authAPI={
     me(){
-        return instance.get(`auth/`)
+        return instance.get(`auth/me`)
     }
 }
 
