@@ -18,7 +18,7 @@ const Dialogs = (props) => {
         props.sendMessage(values.newMessageBody)
     }
 
-    if(props.isAuth) return <Redirect to='/login'/>  //НЕ ЗАБУДЬ ПОСТАВИТЬ '!'
+    if(!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={style.dialogs}>
@@ -34,3 +34,5 @@ const Dialogs = (props) => {
 }
 
 export default Dialogs
+
+
