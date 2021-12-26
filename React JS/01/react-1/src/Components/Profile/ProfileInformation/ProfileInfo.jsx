@@ -4,20 +4,16 @@ import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-    if(!props.profile){
+const ProfileInfo = ({profile,status,updateStatus}) => {
+    if(!profile){
         return <Preloader/>
     }
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src='https://avatars.mds.yandex.net/get-zen_doc/4700797/pub_60c2f3fe596b103555d3d926_60d0be92b2ba075e65605021/scale_1200'/>*/}
-            {/*</div>*/}
             <div className={style.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <div>{props.profile.lookingForAJobDescription}</div>
+                <img src={profile.photos.large}/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <div>{profile.lookingForAJobDescription}</div>
             </div>
         </div>
     )
