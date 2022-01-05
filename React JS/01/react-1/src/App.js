@@ -4,7 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Music from "./Components/Music/Music";
 import News from "./Components/News/News";
 import Settings from "./Components/Settings/Settings";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 // import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 // import ProfileContainer from "./Components/Profile/ProfileContainer";
@@ -58,13 +58,13 @@ const mapStateToProps = (state) => ({
 let AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp}))(App)
 
 let SamuraiJSApp = () => {
-    return <BrowserRouter>
+    return <HashRouter >
         <Provider store={store}>
             <React.StrictMode>
                 <AppContainer/>
             </React.StrictMode>,
         </Provider>,
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiJSApp
