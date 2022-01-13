@@ -3,7 +3,6 @@ import styles from "./Paginator.module.css";
 import cn from "classnames";
 
 const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
-debugger
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 
     let pages = [];
