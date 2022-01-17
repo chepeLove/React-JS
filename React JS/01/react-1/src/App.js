@@ -47,7 +47,7 @@ class App extends React.Component {
                     <Switch>
                         <Redirect exact from="/" to="/profile" />
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/users' render={() => <UsersContainer pageTitle = {'Users'}/>}/>
                         <Route path='/profile:userId?' render={withSuspense(ProfileContainer)}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/news' render={() => <News/>}/>
