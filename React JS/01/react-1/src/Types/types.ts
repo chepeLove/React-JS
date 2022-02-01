@@ -1,6 +1,6 @@
 export type PostType = {
     id:number,
-    textPost:string,
+    message:string,
     likesCount:number
 }
 
@@ -21,12 +21,13 @@ export type PhotosType ={
 }
 
 export type ProfileType = {
-    userId:number,
-    lookingForAJob:boolean,
-    lookingForAJobDescription:string,
-    fullName:string,
-    contacts: ContactsType,
+    userId:number
+    lookingForAJob:boolean
+    lookingForAJobDescription:string
+    fullName:string
+    contacts: ContactsType
     photos:PhotosType
+    aboutMe: string
 
 }
 
@@ -35,4 +36,5 @@ export type UserType = {
     name:string
     status:string
     photos:PhotosType
+    followed: boolean
 }
