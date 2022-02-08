@@ -10,7 +10,6 @@ let initialState = {
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status:'',
-    newPostText: ''
 }
 
 

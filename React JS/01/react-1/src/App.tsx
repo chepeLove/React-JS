@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component, ComponentType} from 'react'
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
 import Music from "./Components/Music/Music";
@@ -12,26 +12,34 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./Components/Common/Preloader/Preloader";
-import store from "./Redux/redux-store";
+import store, {AppStateType} from "./Redux/redux-store";
 import {withSuspense} from "./HOC/withSuspense";
 
 const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"))
 const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"))
 
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
 
-class App extends React.Component {
+class App extends React.Component<MapPropsType & DispatchPropsType> {
 
-    catchAllUnhandledErrors = (promiseRejectionEvent)=>{
-        alert('Some error occured')
+    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+        alert('Some error occurred')
         // console.error(promiseRejectionEvent)
     }
 
     componentDidMount() {
         this.props.initializeApp();
-        window.addEventListener('unhandledrejection',this.catchAllUnhandledErrors)}
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
 
     componentWillUnmount() {
-        window.addEventListener('unhandledrejection',this.catchAllUnhandledErrors)}
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
 
     render() {
 
@@ -45,10 +53,10 @@ class App extends React.Component {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Redirect exact from="/" to="/profile" />
-                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                        <Route path='/users' render={() => <UsersContainer pageTitle = {'Users'}/>}/>
-                        <Route path='/profile:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Redirect exact from="/" to="/profile"/>
+                        <Route path='/dialogs' render={() =><SuspendedDialogs/> }/>
+                        <Route path='/users' render={() => <UsersContainer pageTitle={'Users'}/>}/>
+                        <Route path='/profile:userId?' render={()=><SuspendedProfile/>}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
@@ -61,13 +69,13 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-let AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp}))(App)
+let AppContainer = compose<ComponentType>(withRouter, connect(mapStateToProps, {initializeApp}))(App)
 
-let SamuraiJSApp = () => {
+let SocialNetworkJSApp: React.FC = () => {
     return <BrowserRouter>
         <Provider store={store}>
             <React.StrictMode>
@@ -77,4 +85,4 @@ let SamuraiJSApp = () => {
     </BrowserRouter>
 }
 
-export default SamuraiJSApp
+export default SocialNetworkJSApp

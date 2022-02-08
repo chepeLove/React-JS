@@ -2,7 +2,17 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
-const Header = (props) => {
+export type MapPropsType = {
+    isAuth:boolean|null
+    login:string | null,
+
+}
+
+export type DispatchPropsType = {
+    logout:()=>void
+}
+
+const Header:React.FC<MapPropsType&DispatchPropsType> = (props) => {
     return <header className={s.header}>
         <img src="https://i.pinimg.com/736x/23/80/0b/23800b995292379883a15d9a4c382b22--awesome-logos-animal-logo.jpg" />
 

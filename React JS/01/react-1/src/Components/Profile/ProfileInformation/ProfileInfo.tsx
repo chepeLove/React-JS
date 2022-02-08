@@ -1,11 +1,20 @@
-import React, {useState} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import style from './ProfileInfo.module.css'
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../Assets/image users/users png.png"
 import ProfileDataForm from "./ProfileDataForm";
+import {ContactsType, ProfileType} from "../../../Types/types";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,saveProfile}) => {
+type PropsType = {
+    profile:ProfileType|null,
+    status:string,
+    updateStatus:(status:string)=>void,
+    isOwner:boolean
+    savePhoto:(file:File)=>void
+    saveProfile:(profile:ProfileType)=>Promise<any>
+}
+const ProfileInfo:React.FC<PropsType> = ({profile, status, updateStatus, isOwner, savePhoto,saveProfile}) => {
 
     let [editMode,setEditMode] = useState(false)
 
@@ -13,13 +22,14 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,saveProf
         return <Preloader/>
     }
 
-    const onMainPhotoSelected = (e) => {
-        if (e.target.files.length) {
+    const onMainPhotoSelected = (e:ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
             savePhoto(e.target.files[0])
         }
     }
-    const onSubmit = (formData) => {
-         saveProfile(formData).then(
+    const onSubmit = (formData:ProfileType) => {
+        // todo:remove then
+        saveProfile(formData).then(
             ()=>{
                 setEditMode(false)
             }
@@ -39,7 +49,12 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,saveProf
     )
 }
 
-const ProfileData = ({profile,isOwner,goToEditMode}) => {
+type ProfileDataPropsType={
+    profile:ProfileType
+    isOwner:boolean
+    goToEditMode: ()=>void
+}
+const ProfileData:React.FC<ProfileDataPropsType> = ({profile,isOwner,goToEditMode}) => {
     return <div>
         {isOwner &&
             <div>
@@ -61,8 +76,10 @@ const ProfileData = ({profile,isOwner,goToEditMode}) => {
             <b>About me</b>: {profile.aboutMe}
         </div>
         <div>
-            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            <b>Contacts</b>: {Object
+            .keys(profile.contacts)
+            .map((key) => {
+            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}/>
         })}
         </div>
     </div>
@@ -70,8 +87,11 @@ const ProfileData = ({profile,isOwner,goToEditMode}) => {
 }
 
 
-
-const Contact = ({contactTitle, contactValue}) => {
+type ContactsPropsType = {
+    contactTitle:string
+    contactValue:string
+}
+const Contact:React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
     return <div className={style.contact}><b>{contactTitle}</b>:{contactValue}</div>
 }
 

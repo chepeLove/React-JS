@@ -2,23 +2,31 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Redirect} from "react-router-dom";
-import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
+import {InitialStateType} from "../../Redux/dialogs-reducer";
+import AddMessageForm from './AddMessageForm/AddMessageForm';
 
-const Dialogs = (props) => {
+type OwnPropsType = {
+    dialogsPage:InitialStateType
+    sendMessage:(messageText:string)=> void
+}
+
+export type NewMessageFormValuesType = {
+    newMessageBody: string
+}
+
+
+const Dialogs:React.FC<OwnPropsType> = (props) => {
 
     let state = props.dialogsPage
 
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key = {d.id} id={d.id}/>)
 
-    let messagesElements = state.messages.map(m => <Message text={m.message} key = {m.id} id={m.id}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message} key = {m.id} />)
 
 
-    let addNewMessage = (values)=>{
+    let addNewMessage = (values:NewMessageFormValuesType)=>{
         props.sendMessage(values.newMessageBody)
     }
-
-    if(!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={style.dialogs}>
@@ -27,7 +35,7 @@ const Dialogs = (props) => {
             </div>
             <div className={style.messages}>
                 <div>{messagesElements}</div>
-            <AddMessageFormRedux onSubmit = {addNewMessage}/>
+            <AddMessageForm onSubmit = {addNewMessage}/>
             </div>
         </div>
     )

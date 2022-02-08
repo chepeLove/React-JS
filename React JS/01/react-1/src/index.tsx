@@ -3,11 +3,11 @@ import './index.css';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import SamuraiJSApp from "./App";
+import SocialNetworkJSApp from "./App";
 
 
     ReactDOM.render(
-        <SamuraiJSApp/>,
+        <SocialNetworkJSApp/>,
         document.getElementById('root')
     )
 

@@ -1,11 +1,16 @@
 import React from 'react'
 import style from './Post.module.css'
 
-const Post = (props)=> {
+type PropsType = {
+    message:string
+    likesCount:number
+}
+
+const Post:React.FC<PropsType> = (props)=> {
       return (
             <div className={style.item}>
                 <img src="https://png.pngtree.com/png-vector/20200625/ourmid/pngtree-business-person-short-hair-girl-silhouette-avatar-png-image_2266253.jpg"/>
-                {props.text}
+                {props.message}
             <div>
             <span>like</span> {props.likesCount}
             </div>
