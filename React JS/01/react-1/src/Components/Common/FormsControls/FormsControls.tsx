@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./FormsControls.module.css"
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 import {FieldValidatorType, required} from "../../../utils/validators/validators";
-import {LoginFormValuesType} from "../../Login/Login";
+import {LoginFormValuesType} from "../../Login/LoginPage";
 
 type FormControlPropsType = {
     meta: WrappedFieldMetaProps
