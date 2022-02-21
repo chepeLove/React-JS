@@ -25,6 +25,7 @@ const {Content, Footer, Sider } = Layout;
 
 const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"))
 const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"))
+const ChatPage = React.lazy(() => import("./Pages/Chat/ChatPage"))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -32,6 +33,7 @@ type DispatchPropsType = {
 }
 const SuspendedDialogs = withSuspense(DialogsContainer)
 const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
 
@@ -77,16 +79,19 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                     <Menu.Item key="2"><Link to="/dialogs" >Massages</Link></Menu.Item>
                                 </SubMenu>
                                 <SubMenu key="sub2" icon={<LaptopOutlined />} title="Users ">
-                                    <Menu.Item key="5"><Link to="/users" >Users</Link></Menu.Item>
+                                    <Menu.Item key="3"><Link to="/users" >Users</Link></Menu.Item>
                                 </SubMenu>
-                                <SubMenu key="sub3" icon={<NotificationOutlined />} title="News">
-                                    <Menu.Item key="9"><Link to="/news" >News</Link></Menu.Item>
+                                <SubMenu key="sub3" icon={<LaptopOutlined />} title="Chat ">
+                                    <Menu.Item key="4"><Link to="/chat" >Chat</Link></Menu.Item>
                                 </SubMenu>
-                                        <SubMenu key="sub3" icon={<NotificationOutlined />} title="Music">
-                                            <Menu.Item key="9"><Link to="/music">Music</Link></Menu.Item>
+                                <SubMenu key="sub4" icon={<NotificationOutlined />} title="News">
+                                    <Menu.Item key="5"><Link to="/news" >News</Link></Menu.Item>
+                                </SubMenu>
+                                        <SubMenu key="sub5" icon={<NotificationOutlined />} title="Music">
+                                            <Menu.Item key="6"><Link to="/music">Music</Link></Menu.Item>
                                         </SubMenu>
-                                        <SubMenu key="sub3" icon={<NotificationOutlined />} title="Settings">
-                                            <Menu.Item key="9"><Link to="/settings" >Settings</Link></Menu.Item>
+                                        <SubMenu key="sub6" icon={<NotificationOutlined />} title="Settings">
+                                            <Menu.Item key="7"><Link to="/settings" >Settings</Link></Menu.Item>
                                         </SubMenu>
                             </Menu>
                         </Sider>
@@ -100,6 +105,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 <Route path='/news' render={() => <News/>}/>
                                 <Route path='/settings' render={() => <Settings/>}/>
                                 <Route path='/login' render={() => <LoginPage/>}/>
+                                <Route path='/chat' render={() => <SuspendedChatPage/>}/>
                                 <Route path='*' render={() => <div>404 NOT FOUND
                                     <Button type={"primary"}>OK</Button>
                                 </div>}/>
